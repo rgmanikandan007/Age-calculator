@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculaor</title>
+    <link rel="stylesheet" href="Agecalc.css">
+</head>
+
+<body>
+    <div class="agecalculator">
+        <h2>Age Calculator</h2>
+        <form action="#" onsubmit="event.preventDefault(); calculate();">
+            <div>
+                <label for="dob">Enter your Date Of Birth:</label>
+                <div><input type="date" id="dob"></div>
+            </div>
+            <div class="btn">
+                <button type="submit">Calculate Age</button>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+    
+    <script>
+        function calculate() {
+            const dob = document.getElementById("dob");
+            if (!dob.value) {
+                alert("Please select DOB");
+                return;
+            }
+    
+            const birthDate = new Date(dob.value);
+            const currentDate = new Date();
+    
+            let age = currentDate.getFullYear() - birthDate.getFullYear();
+            const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+    
+            if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
+                age--;
+            }
+    
+            const birthYear = birthDate.getFullYear();
+            const isLeapYear = (birthYear % 4 === 0);
+    
+            const leapYearMessage = isLeapYear ? "Leap year" : "Not Leap year";
+    
+            document.getElementById("result").textContent = `You are ${age} years old. ${leapYearMessage}`;
+        }
+    </script>
+    
+
+
+</body>
+
+</html>
